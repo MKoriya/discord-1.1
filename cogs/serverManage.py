@@ -39,3 +39,7 @@ class ServerManage(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
+
+
+def setup(client):
+    client.add_cog(ServerManage(client))
