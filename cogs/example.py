@@ -22,8 +22,10 @@ class Example(commands.Cog):
     @clear.error
     async def clear_error(self, ctx, error):
         if isinstance(error, commands.errors.BadArgument):
+            print('Clear Error!! didn\'t provided integer')
             await ctx.send('Error! Please enter the Integer ONLY!!')
         else:
+            print('Unknown Clear Error!!')
             await ctx.send('Error! Something went wrong\nPlease Try Again!')
 
    
