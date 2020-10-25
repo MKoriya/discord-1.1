@@ -18,6 +18,13 @@ class Example(commands.Cog):
             await ctx.channel.purge(limit=amount)
         except:
             await ctx.send('Something went wrong\nTry Again!!')
+            
+    @clear.error
+    async def clear_error(self, ctx, error):
+        if isinstance(error, commands.errors.BadArgument):
+            await ctx.send('Error! Please enter the Integer ONLY!!')
+        else:
+            await ctx.send('Error! Something went wrong\nPlease Try Again!')
 
    
 def setup(client):
