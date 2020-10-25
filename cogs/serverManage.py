@@ -21,21 +21,26 @@ class ServerManage(commands.Cog):
     async def kick(self, ctx, member:discord.Member, *, reason=None):
         await member.kick(reason=reason)
         await ctx.send(f'{member.mention} got kicked.')
+        print(f'{user.name}#{user.discriminator} got kicked')
 
     @kick.error
     async def kick_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
             await ctx.send('You don\'t have permission to kick members!')
+            print('Error! Try to kick without Permission')
         elif isinstance(error, commands.MemberNotFound):
             await ctx.send('Requsted Member is not in Server\nPlease Try Again!!')
+            print('Error! Member is not in Server')
         else:
-            await ctx.send('Something went wrong\nPlease Try Again Later')          
+            await ctx.send('Something went wrong\nPlease Try Again Later')
+            print('Unknown Error!!')
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member:discord.Member, *, reason=None):
         await member.ban(reason=reason)
         await ctx.send(f'{member.mention} got Banned.')
+        print(f'{user.name}#{user.discriminator} got banned')
 
     @ban.error
     async def ban_error(self, ctx, error):
