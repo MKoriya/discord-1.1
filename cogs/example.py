@@ -14,10 +14,8 @@ class Example(commands.Cog):
     @commands.command(aliases=['c'])
     async def clear(self, ctx, amount:int=5):
         amount += 1
-        try:
-            await ctx.channel.purge(limit=amount)
-        except:
-            await ctx.send('Something went wrong\nTry Again!!')
+        await ctx.channel.purge(limit=amount)
+        await ctx.send('Something went wrong\nTry Again!!')
             
     @clear.error
     async def clear_error(self, ctx, error):
