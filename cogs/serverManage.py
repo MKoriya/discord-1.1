@@ -20,13 +20,31 @@ class ServerManage(commands.Cog):
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member:discord.Member, *, reason=None):
         await member.kick(reason=reason)
-        await ctx.send(f'{member.mention} got kicked.')           
+        await ctx.send(f'{member.mention} got kicked.')
+
+    @kick.error
+    async def kick_error(self, ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.send('You don\'t have permission to kick members!')
+        elif isinstance(error, commands.MemberNotFound):
+            await ctx.send('Requsted Member is not in Server\nPlease Try Again!!')
+        else:
+            await ctx.send('Something went wrong\nPlease Try Again Later')          
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member:discord.Member, *, reason=None):
         await member.ban(reason=reason)
-        await ctx.send(f'{member.mention} got Banned.')            
+        await ctx.send(f'{member.mention} got Banned.')
+
+    @ban.error
+    async def ban_error(self, ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.send('You don\'t have permission to ban members!')
+        elif isinstance(error, commands.MemberNotFound):
+            await ctx.send('Requsted Member is not in Server\nPlease Try Again!!')
+        else:
+            await ctx.send('Something went wrong\nPlease Try Again Later')          
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -39,6 +57,15 @@ class ServerManage(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 return
+
+    @unban.error
+    async def unban_error(self, ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            await ctx.send('You don\'t have permission to ban members!')
+        elif isinstance(error, commands.MemberNotFound):
+            await ctx.send('Member not found\nPlease Try Again!!')
+        else:
+            await ctx.send('Something went wrong\nPlease Try Again Later')
 
 def setup(client):
     client.add_cog(ServerManage(client))
