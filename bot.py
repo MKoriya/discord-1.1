@@ -5,9 +5,9 @@ from discord.ext import commands
 client = commands.Bot(command_prefix='.')
 
 @client.event
-async def on_ready(self):
-    await self.client.change_presence(status=discord.Status.idle, activity=discord.Game('Among us'))
-    print("We have logged in as a {}".format(self.client.user))
+async def on_ready():
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game('Among us'))
+    print("We have logged in as a {}".format(client.user))
 
 @client.command()
 async def load(ctx, extension):
