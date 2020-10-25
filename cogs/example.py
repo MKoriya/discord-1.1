@@ -16,6 +16,7 @@ class Example(commands.Cog):
         amount += 1
         await ctx.channel.purge(limit=amount)
         await ctx.send('Something went wrong\nTry Again!!')
+        print(f'{amount} messages cleared by {ctx.author}.')
             
     @clear.error
     async def clear_error(self, ctx, error):

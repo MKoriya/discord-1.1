@@ -21,19 +21,19 @@ class ServerManage(commands.Cog):
     async def kick(self, ctx, member:discord.Member, *, reason=None):
         await member.kick(reason=reason)
         await ctx.send(f'{member.mention} got kicked.')
-        print(f'{member.name}#{member.discriminator} got kicked by {self.client}')
+        print(f'{member.name}#{member.discriminator} got kicked. by {ctx.author}')
 
     @kick.error
     async def kick_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
             await ctx.send('You don\'t have permission to kick members!')
-            print('Error! Try to kick without Permission')
+            print('Kick Error! Try to kick without Permission')
         elif isinstance(error, commands.MemberNotFound):
             await ctx.send('Requsted Member is not in Server\nPlease Try Again!!')
-            print('Error! Member is not in Server')
+            print('Kick Error! Member is not in Server')
         else:
             await ctx.send('Something went wrong\nPlease Try Again Later')
-            print('Unknown Error!!')
+            print('Unknown Kick Error!!')
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -46,10 +46,13 @@ class ServerManage(commands.Cog):
     async def ban_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
             await ctx.send('You don\'t have permission to ban members!')
+            print('Ban Error! Try to ban without Permission')
         elif isinstance(error, commands.MemberNotFound):
             await ctx.send('Requsted Member is not in Server\nPlease Try Again!!')
+            print('Ban Error! Member is not in Server')
         else:
-            await ctx.send('Something went wrong\nPlease Try Again Later')          
+            await ctx.send('Something went wrong\nPlease Try Again Later')
+            print('Unknown Ban Error!!')          
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
@@ -61,16 +64,20 @@ class ServerManage(commands.Cog):
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
+                print(f'{user.name}#{user.discriminator} unbanned.')
                 return
 
     @unban.error
     async def unban_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
             await ctx.send('You don\'t have permission to ban members!')
+            print('Unban Error! Don\'t have permission')
         elif isinstance(error, commands.MemberNotFound):
             await ctx.send('Member not found\nPlease Try Again!!')
+            print('Unban Error! Member not found')
         else:
             await ctx.send('Something went wrong\nPlease Try Again Later')
+            print('Unknown Unban Error!!')
 
 def setup(client):
     client.add_cog(ServerManage(client))
