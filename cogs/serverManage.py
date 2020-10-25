@@ -21,7 +21,7 @@ class ServerManage(commands.Cog):
     async def kick(self, ctx, member:discord.Member, *, reason=None):
         await member.kick(reason=reason)
         await ctx.send(f'{member.mention} got kicked.')
-        print(f'{user.name}#{user.discriminator} got kicked')
+        print(f'{member.name}#{member.discriminator} got kicked by {self.client}')
 
     @kick.error
     async def kick_error(self, ctx, error):
@@ -40,7 +40,7 @@ class ServerManage(commands.Cog):
     async def ban(self, ctx, member:discord.Member, *, reason=None):
         await member.ban(reason=reason)
         await ctx.send(f'{member.mention} got Banned.')
-        print(f'{user.name}#{user.discriminator} got banned')
+        print(f'{member.name}#{member.discriminator} got banned')
 
     @ban.error
     async def ban_error(self, ctx, error):
