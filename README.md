@@ -17,4 +17,4 @@ discord bot which is useful to manage discord server easily
 ## Invite Our Bor via Following Link
 
 
-### <a href='https://discord.com/api/oauth2/authorize?client_id=762000612656939068&permissions=0&scope=bot'> <h3>Invite Bot</h3> </a>
+<a href='https://discord.com/api/oauth2/authorize?client_id=762000612656939068&permissions=0&scope=bot'> <h3>Invite Bot</h3> </a>
