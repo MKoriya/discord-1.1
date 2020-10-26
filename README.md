@@ -13,3 +13,6 @@ discord bot which is useful to manage discord server easily
 ### 2. Example
 1. Clear
 2. Ping
+
+## Invite Our Bor via Following Link
+#### https://discord.com/api/oauth2/authorize?client_id=762000612656939068&permissions=0&scope=bot
